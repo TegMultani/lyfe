@@ -8,19 +8,21 @@ import { StreamsWidget } from '@/components/widgets/StreamsWidget';
 import { YoutubeWidget } from '@/components/widgets/YoutubeWidget';
 import { CalendarWidget } from '@/components/widgets/CalendarWidget';
 import { SocialsWidget } from '@/components/widgets/SocialsWidget';
+import { WeatherWidget } from '@/components/widgets/WeatherWidget';
 import { Edit2, Check, ChevronUp, ChevronDown, Eye, EyeOff, GripVertical } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const WIDGET_REGISTRY: Record<string, { component: React.FC<any>; label: string; span: number; height?: string }> = {
+const WIDGET_REGISTRY: Record<string, { component: React.FC; label: string; span: number; height?: string }> = {
   stocks: { component: StocksWidget, label: 'Markets', span: 1 },
   news: { component: NewsWidget, label: 'News Feed', span: 2 },
+  weather: { component: WeatherWidget, label: 'Weather', span: 1 },
   streams: { component: StreamsWidget, label: 'Live Streams', span: 1 },
   youtube: { component: YoutubeWidget, label: 'YouTube', span: 2 },
   calendar: { component: CalendarWidget, label: 'Calendar', span: 1 },
   socials: { component: SocialsWidget, label: 'Shortcuts', span: 2 },
 };
 
-const ALL_WIDGET_IDS = ['stocks', 'news', 'streams', 'youtube', 'calendar', 'socials'];
+const ALL_WIDGET_IDS = ['stocks', 'news', 'weather', 'streams', 'youtube', 'calendar', 'socials'];
 
 export default function Home() {
   const { config, updateConfig } = useAppStore();
