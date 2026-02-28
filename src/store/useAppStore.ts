@@ -17,6 +17,15 @@ export interface CalendarEvent {
     color: string;   // hex or tailwind-compatible
 }
 
+export interface YoutubeVideo {
+    videoId: string;
+    title: string;
+    channel: string;
+    viewCount?: string;
+    publishedAt?: string;
+    thumbnail: string;
+}
+
 export interface UserConfig {
     widgets: string[];
     stocks: string[];
@@ -25,6 +34,7 @@ export interface UserConfig {
     activeStreamIndex: number;
     youtubeRegion: YoutubeRegion;
     youtubeKeyword: string;
+    watchLater: YoutubeVideo[];
     events: CalendarEvent[];
 }
 
@@ -54,6 +64,7 @@ const DEFAULT_CONFIG: UserConfig = {
     activeStreamIndex: 0,
     youtubeRegion: 'CA',
     youtubeKeyword: 'technology',
+    watchLater: [],
     events: [],
 };
 
@@ -71,6 +82,7 @@ function migrateConfig(raw: any): UserConfig {
     if (typeof config.activeStreamIndex !== 'number') config.activeStreamIndex = 0;
     if (!config.youtubeRegion) config.youtubeRegion = 'CA';
     if (!config.youtubeKeyword) config.youtubeKeyword = 'technology';
+    if (!config.watchLater) config.watchLater = [];
     if (!config.events) config.events = [];
     if (!config.widgets?.includes('calendar')) config.widgets = [...(config.widgets || []), 'calendar'];
     if (!config.widgets?.includes('socials')) config.widgets = [...(config.widgets || []), 'socials'];
