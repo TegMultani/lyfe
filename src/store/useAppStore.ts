@@ -44,6 +44,7 @@ export interface UserConfig {
     watchLater: YoutubeVideo[];
     events: CalendarEvent[];
     reminders: Reminder[];
+    weatherCity: string;
 }
 
 type AppPhase = 'loading' | 'needs_pin' | 'ready';
@@ -65,7 +66,7 @@ const DEFAULT_STREAMS: StreamChannel[] = [
 ];
 
 const DEFAULT_CONFIG: UserConfig = {
-    widgets: ['stocks', 'news', 'streams', 'youtube', 'calendar', 'socials'],
+    widgets: ['stocks', 'news', 'streams', 'youtube', 'calendar', 'socials', 'weather'],
     stocks: ['AAPL', 'MSFT', 'GOOGL', 'AMZN'],
     newsCategory: 'Tech',
     streams: DEFAULT_STREAMS,
@@ -75,6 +76,7 @@ const DEFAULT_CONFIG: UserConfig = {
     watchLater: [],
     events: [],
     reminders: [],
+    weatherCity: 'Toronto',
 };
 
 function migrateConfig(raw: any): UserConfig {
@@ -94,8 +96,10 @@ function migrateConfig(raw: any): UserConfig {
     if (!config.watchLater) config.watchLater = [];
     if (!config.events) config.events = [];
     if (!config.reminders) config.reminders = [];
+    if (!config.weatherCity) config.weatherCity = 'Toronto';
     if (!config.widgets?.includes('calendar')) config.widgets = [...(config.widgets || []), 'calendar'];
     if (!config.widgets?.includes('socials')) config.widgets = [...(config.widgets || []), 'socials'];
+    if (!config.widgets?.includes('weather')) config.widgets = [...(config.widgets || []), 'weather'];
 
     return config;
 }
