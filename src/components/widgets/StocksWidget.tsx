@@ -48,7 +48,7 @@ export function StocksWidget({ showSearch = false }: { showSearch?: boolean; id?
     const [searchOpen, setSearchOpen] = useState(showSearch);
     const [chartSymbol, setChartSymbol] = useState<string | null>(null);
     const [mounted, setMounted] = useState(false);
-    const searchTimeout = useRef<NodeJS.Timeout>();
+    const searchTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
 
     // Drag state
     const [dragIdx, setDragIdx] = useState<number | null>(null);
