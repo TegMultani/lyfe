@@ -132,7 +132,7 @@ export default function Home() {
       {/* Dashboard Grid - rendered row by row */}
       <div className="p-3 md:p-5 space-y-4">
         {rows.map((row, rowIdx) => (
-          <div key={rowIdx} className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-[380px]">
+          <div key={rowIdx} className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-[minmax(380px,auto)]">
             {row.map(id => {
               const w = WIDGET_REGISTRY[id];
               if (!w) return null;
