@@ -39,12 +39,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen selection:bg-blue-500/30`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white h-[100dvh] overflow-hidden selection:bg-blue-500/30`}
       >
         <ClientInitializer>
-          <div className="flex flex-col md:flex-row min-h-screen">
+          <div className="flex flex-col md:flex-row h-full">
             <Sidebar />
-            <main className="flex-1 overflow-x-hidden">
+            <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-0 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
               {children}
             </main>
           </div>

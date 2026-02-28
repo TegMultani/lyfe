@@ -21,7 +21,7 @@ export function Sidebar() {
     ];
 
     return (
-        <aside className="fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around border-t border-white/10 bg-black/60 backdrop-blur-xl md:top-0 md:h-screen md:w-20 md:flex-col md:justify-start md:border-r md:border-t-0 py-2 md:py-6">
+        <aside className="fixed bottom-0 left-0 right-0 z-50 flex h-[calc(4rem+env(safe-area-inset-bottom))] items-center justify-around border-t border-white/10 bg-black/70 backdrop-blur-xl md:top-0 md:h-screen md:w-20 md:flex-col md:justify-start md:border-r md:border-t-0 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] md:py-6 md:pb-6">
             {links.map(link => {
                 const isActive = pathname === link.href;
                 return (
