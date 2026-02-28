@@ -213,9 +213,9 @@ export default function YoutubePage() {
                                         <button
                                             onClick={toggleSave}
                                             className={cn(
-                                                "absolute top-2 right-2 p-2 rounded-xl backdrop-blur-md transition-all opacity-0 group-hover:opacity-100",
+                                                "absolute top-2 right-2 p-2 rounded-xl backdrop-blur-md transition-all md:opacity-0 group-hover:opacity-100",
                                                 isSaved
-                                                    ? "bg-red-500/80 text-white opacity-100"
+                                                    ? "bg-red-500/80 text-white opacity-100 md:opacity-100"
                                                     : "bg-black/50 text-white/70 hover:text-white hover:bg-black/80"
                                             )}
                                         >
