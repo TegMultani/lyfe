@@ -12,6 +12,7 @@ export function StreamsWidget({ id, isEditing }: { id?: string; isEditing?: bool
     const containerRef = useRef<HTMLDivElement>(null);
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(true);
+    const [volume, setVolume] = useState(0.5);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const hlsRef = useRef<Hls | null>(null);
 
@@ -50,10 +51,13 @@ export function StreamsWidget({ id, isEditing }: { id?: string; isEditing?: bool
         };
     }, [playing, activeIdx]);
 
-    // Update muted state on video element
+    // Update muted state and volume on video element
     useEffect(() => {
-        if (videoRef.current) videoRef.current.muted = muted;
-    }, [muted]);
+        if (videoRef.current) {
+            videoRef.current.muted = muted;
+            videoRef.current.volume = volume;
+        }
+    }, [muted, volume]);
 
     // Listen for fullscreen changes
     useEffect(() => {
@@ -133,18 +137,36 @@ export function StreamsWidget({ id, isEditing }: { id?: string; isEditing?: bool
                         </div>
 
                         <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
-                            {/* Mute toggle */}
-                            <button
-                                onClick={() => setMuted(!muted)}
-                                className="p-1.5 rounded-md bg-black/50 backdrop-blur-md hover:bg-black/70 transition-colors border border-white/10"
-                                title={muted ? 'Unmute' : 'Mute'}
-                            >
-                                {muted ? (
-                                    <VolumeX className="w-3.5 h-3.5 text-white/70" />
-                                ) : (
-                                    <Volume2 className="w-3.5 h-3.5 text-white/70" />
-                                )}
-                            </button>
+                            {/* Volume Control */}
+                            <div className="group flex items-center bg-black/50 backdrop-blur-md rounded-md hover:bg-black/70 transition-colors border border-white/10 overflow-hidden">
+                                <button
+                                    onClick={() => setMuted(!muted)}
+                                    className="p-1.5 transition-colors"
+                                    title={muted || volume === 0 ? 'Unmute' : 'Mute'}
+                                >
+                                    {muted || volume === 0 ? (
+                                        <VolumeX className="w-3.5 h-3.5 text-white/70" />
+                                    ) : (
+                                        <Volume2 className="w-3.5 h-3.5 text-white/70" />
+                                    )}
+                                </button>
+                                <div className="w-0 opacity-0 group-hover:w-20 group-hover:opacity-100 group-hover:pr-2 transition-all duration-200 ease-out flex items-center">
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        step="0.01"
+                                        value={muted ? 0 : volume}
+                                        onChange={(e) => {
+                                            const v = parseFloat(e.target.value);
+                                            setVolume(v);
+                                            if (v > 0) setMuted(false);
+                                            else if (v === 0) setMuted(true);
+                                        }}
+                                        className="w-full h-1 bg-white/30 rounded-lg appearance-none cursor-pointer accent-white"
+                                    />
+                                </div>
+                            </div>
 
                             {/* Fullscreen toggle */}
                             <button
