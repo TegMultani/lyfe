@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
-import { Settings, LayoutGrid, Newspaper, Tv, LineChart, Youtube, LogOut, CalendarDays } from 'lucide-react';
+import { LayoutGrid, Newspaper, Tv, LineChart, Youtube, LogOut, CalendarDays, Bell } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -18,6 +18,7 @@ export function Sidebar() {
         { href: '/streams', icon: Tv, label: 'Streams' },
         { href: '/youtube', icon: Youtube, label: 'YouTube' },
         { href: '/calendar', icon: CalendarDays, label: 'Calendar' },
+        { href: '/reminders', icon: Bell, label: 'Reminders' },
     ];
 
     return (

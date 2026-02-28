@@ -26,6 +26,13 @@ export interface YoutubeVideo {
     thumbnail: string;
 }
 
+export interface Reminder {
+    id: string;
+    title: string;
+    remindAt: string;
+    done: boolean;
+}
+
 export interface UserConfig {
     widgets: string[];
     stocks: string[];
@@ -36,6 +43,7 @@ export interface UserConfig {
     youtubeKeyword: string;
     watchLater: YoutubeVideo[];
     events: CalendarEvent[];
+    reminders: Reminder[];
 }
 
 type AppPhase = 'loading' | 'needs_pin' | 'ready';
@@ -66,6 +74,7 @@ const DEFAULT_CONFIG: UserConfig = {
     youtubeKeyword: 'technology',
     watchLater: [],
     events: [],
+    reminders: [],
 };
 
 function migrateConfig(raw: any): UserConfig {
@@ -84,6 +93,7 @@ function migrateConfig(raw: any): UserConfig {
     if (!config.youtubeKeyword) config.youtubeKeyword = 'technology';
     if (!config.watchLater) config.watchLater = [];
     if (!config.events) config.events = [];
+    if (!config.reminders) config.reminders = [];
     if (!config.widgets?.includes('calendar')) config.widgets = [...(config.widgets || []), 'calendar'];
     if (!config.widgets?.includes('socials')) config.widgets = [...(config.widgets || []), 'socials'];
 
