@@ -37,7 +37,6 @@ export default function DrivePage() {
       pitch: 62,
       bearing: START_POS.heading,
       maxBounds: VANCOUVER_BOUNDS,
-      antialias: true,
     });
 
     const carEl = document.createElement('div');
